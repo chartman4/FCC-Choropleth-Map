@@ -1,0 +1,46 @@
+#title {
+    text-align: center;
+    font-size: 2.3em;
+    padding: 20px;
+    font-weight: bold;
+  }
+
+  #description{
+     margin: 20px;
+  }
+
+  path {
+    stroke:white;
+    stroke-width: 1px;
+ }
+  
+ body {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: center;
+ }
+  
+ .county {
+    font: 14px sans-serif;
+    font-weight: bold;
+ }
+ #legend {
+   text-align: center;
+}
+
+  
+ #tooltip {
+   position: absolute;
+   width: max-content;   
+   height: 20px; 
+   padding: 2px;
+   font: 16px sans-serif;
+   background: rgb(225, 235, 198);
+   border: 0px;
+   border-radius: 8px;
+   pointer-events: none;
+ }
+ .counties :hover {
+  fill: rgb(213, 224, 50);
+}

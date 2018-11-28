@@ -1,0 +1,82 @@
+ // const numColors = colorScale.range().length;
+
+    // set legend cell height, width and legend width
+    const legendRectHeight = 30,
+        legendRectWidth = 30,
+        legendWidth = numColors * legendRectWidth;
+    //Adding legend for our Choropleth
+
+//   Create a Legend
+    const legends = d3
+        .select("#legend")
+        .append("svg")
+        .attr("width", legendWidth)
+        .attr("height", legendRectHeight);
+    // .append("g")
+    // .attr("transform", "translate(0,40)");
+
+    // create the scale for the x axis of the legend
+    const lx = d3
+        .scaleLinear()
+        .domain([3.0, 12.0, 21.0, 30.0, 39.0, 48.0, 57.0, 66.0, 100.0])
+        .range([0, legendWidth]);
+
+
+    // determine desired tick values for legend
+    const arr = [3.0, 12.0, 21.0, 30.0, 39.0, 48.0, 57.0, 66.0];
+
+    // create the x axis on legend
+    const lxAxis = d3.axisBottom(lx)
+        .tickSize(13)
+        .tickSizeOuter(0)
+        .tickValues(arr);
+
+    // add the cells to the legend colored using the color scale from the heatmap
+    legends
+        .selectAll(".legend")
+        .data(colorScale.range())
+        .enter()
+        .append("g")
+        .append("rect")
+        .attr("class", "bar")
+        .attr("width", legendRectWidth)
+        .attr("height", legendRectHeight)
+        .attr("x", (d, i) => i * legendRectWidth)
+        .attr("fill", d => d);
+    // add the axis of the legend
+    legends
+        .append("g")
+        .attr("transform", "translate(30," + legendRectHeight + ")")
+        .call(lxAxis);
+
+
+    var legend = svg.selectAll("g.legend")
+        .data(ext_color_domain)
+        .enter().append("g")
+        .attr("class", "legend");
+
+    var ls_w = 40, ls_h = 20;
+    xpos = width / 2;
+
+
+    legend.append("rect")
+        .attr("x", (d, i) => i * ls_w)
+        .attr("y", 0)
+
+        // .attr("y", function (d, i) { return (i * ls_h) - 2 * ls_h; })
+
+        // .attr("y", function (d, i) { return height - (i * ls_h) - 2 * ls_h; })
+        .attr("width", ls_w)
+        .attr("height", ls_h)
+        .style("fill", function (d, i) { return colorScale(d); })
+        .style("opacity", 0.8);
+
+    legend.append("text")
+        // .attr("x", xpos)
+        // .attr("y", function (d, i) { return height - (i * ls_h) - ls_h - 4; })
+        .attr("y", ls_h + 15)
+        .attr("x", function (d, i) { return (i * ls_w) })
+
+        .text(function (d, i) { return legend_labels[i]; });
+
+}       
